@@ -1,4 +1,2 @@
 # yourls-cookbook
-
-TODO: Enter the cookbook description here.
-
+Installs the YOURLS URL Shortener, using Chef.io
