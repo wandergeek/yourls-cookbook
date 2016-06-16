@@ -1,0 +1,7 @@
+name 'yourls-cookbook'
+maintainer 'Yorgos Saslis'
+maintainer_email 'g.saslis@gmail.com'
+license 'mit'
+description 'Installs/Configures yourls-cookbook'
+long_description 'Installs/Configures yourls-cookbook'
+version '0.1.0'
