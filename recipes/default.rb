@@ -24,6 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+secrets = data_bag_item('yourls', 'secrets')
 
 # Download and extract yourls source
 ark 'yourls' do
@@ -37,10 +38,13 @@ end
 template "#{node['yourls']['path']}/yourls/user/config.php" do
   source 'yourls_config.php.erb'
   variables({
-    :db_pass => node['yourls']['mysql_yourls_pass'],
-    :yourls_url => 'default-ubuntu-1404:8880',
+    :db_name => 'yourls',
+    :db_host => node['yourls']['db_host'],
+    :db_pass => secrets['db_pass'],
+    :yourls_url => node['yourls']['yourls_url'],
+    :gmt_offset => '10',
     :usernames_passwords => {
-      :yourls => :a_random_pass
+      'sysadmin' => secrets['sysadmin_pass']
     }
   })
   owner node['apache']['user']
@@ -60,8 +64,6 @@ web_app 'yourls' do
   server_port 8880
   docroot "#{node['yourls']['path']}/yourls"
   allow_override 'All'
-  # template 'web_app.conf.erb'
-  # cookbook 'yourls-cookbook'
   cookbook 'apache2'
   notifies :restart, 'service[apache2]'
 end
