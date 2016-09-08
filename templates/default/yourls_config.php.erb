@@ -17,10 +17,10 @@ define( 'YOURLS_DB_USER', 'yourls' );
 define( 'YOURLS_DB_PASS', '<%= @db_pass %>' );
 
 /** The name of the database for YOURLS */
-define( 'YOURLS_DB_NAME', 'yourls' );
+define( 'YOURLS_DB_NAME', '<%= @db_name %>' );
 
 /** MySQL hostname */
-define( 'YOURLS_DB_HOST', '127.0.0.1' );
+define( 'YOURLS_DB_HOST', '<%= @db_host %>' );
 
 /** MySQL tables prefix */
 define( 'YOURLS_DB_PREFIX', 'yourls_' );
@@ -33,7 +33,7 @@ define( 'YOURLS_DB_PREFIX', 'yourls_' );
 define( 'YOURLS_SITE', 'http://<%= @yourls_url %>' );
 
 /** Timezone GMT offset */
-define( 'YOURLS_HOURS_OFFSET', 2 );
+define( 'YOURLS_HOURS_OFFSET', <%= @gmt_offset %> );
 
 /** Allow multiple short URLs for a same long URL
  ** Set to true to have only one pair of shortURL/longURL (default YOURLS behavior)
