@@ -42,7 +42,7 @@ template "#{node['yourls']['path']}/yourls/user/config.php" do
     :db_host => node['yourls']['db_host'],
     :db_pass => secrets['db_pass'],
     :yourls_url => node['yourls']['yourls_url'],
-    :gmt_offset => '10',
+    :gmt_offset => node['yourls']['gmt_offset'],
     :usernames_passwords => {
       'sysadmin' => secrets['sysadmin_pass']
     }
@@ -59,10 +59,11 @@ file "#{node['yourls']['path']}/yourls/.htaccess" do
 end
 
 web_app 'yourls' do
-  server_name node['hostname']
-  server_aliases [ node['fqdn'] ]
-  server_port 8880
-  docroot "#{node['yourls']['path']}/yourls"
+  server_name node['yourls']['server_name']
+  server_port node['yourls']['port']
+  document_root node['yours']['document_root']
+  apache_listen node['apache']['listen']
+  directory_index 'index.php'
   allow_override 'All'
   cookbook 'apache2'
   notifies :restart, 'service[apache2]'
