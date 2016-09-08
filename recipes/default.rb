@@ -59,12 +59,12 @@ file "#{node['yourls']['path']}/yourls/.htaccess" do
 end
 
 web_app 'yourls' do
+  template 'yourls_apache_conf.erb'
   server_name node['yourls']['server_name']
   server_port node['yourls']['port']
-  document_root node['yours']['document_root']
-  apache_listen node['apache']['listen']
+  document_root node['yourls']['document_root']
+  apache_listen node['yourls']['port']
   directory_index 'index.php'
   allow_override 'All'
-  cookbook 'apache2'
   notifies :restart, 'service[apache2]'
 end

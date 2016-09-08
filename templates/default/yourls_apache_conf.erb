@@ -1,8 +1,8 @@
-<VirtualHost *:'<%= @apache_listen %>'>
-   ServerName '<%= @server_name %>'
-   DocumentRoot '<%= @document_root %>'
+<VirtualHost *:<%= @params[:apache_listen] %>>
+   ServerName <%= @params[:server_name] %>
+   DocumentRoot <%= @params[:document_root] %>
    DirectoryIndex index.php
-   <Directory '<%= @document_root %>'>
+   <Directory <%= @params[:document_root] %>>
       AllowOverride All
    </Directory>
 </VirtualHost>
